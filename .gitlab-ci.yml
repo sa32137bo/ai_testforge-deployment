@@ -1,0 +1,20 @@
+stages:
+  - deploy
+
+pages:
+  stage: deploy
+  tags:
+    - AITestForge
+  script:
+    - echo "Running Node.js build on Windows Shell runner"
+    - npm ci
+    - npm run build
+  cache:
+    key: "${CI_COMMIT_REF_SLUG}"
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - build
+  only:
+    - AITestForge-Dep
